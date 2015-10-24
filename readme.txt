@@ -8,21 +8,26 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A simple automated Wordpress plugin that imports tweets as posts.
+A WordPress plugin that sanitizes tags in posts.
 
 == Description ==
 
-A simple automated Wordpress plugin that imports tweets as posts.
+A WordPress plugin that sanitizes tags in posts.
+
+If you add the following tags to your posts they will be transformed like this:
+
+```
+"joe" -> "Joe"
+"iMac" -> "iMac" (no change)
+"googletranslate" -> "Google Translate"
+"Wordpress" -> "WordPress"
+```
 
 == Installation ==
 
 1. Download to your Wordpress plugin folder.
-1. Activate plugin.
-1. Create a Twitter Application https://apps.twitter.com/.
-1. Find and create "Your access token", make sure to set privileges to read only.
-1. Configure the plugin with your Twitter screen name, and the 4 keys obtained from creating the Twitter app.
-1. Activate the import of tweets.
-1. All of your tweets are now accesible as posts.
+2. Activate plugin.
+3. Whenever you add a tag to your post it will be sanitized so as to look prettier.
 
 == Frequently Asked Questions ==
 
