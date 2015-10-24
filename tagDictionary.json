@@ -1,0 +1,20 @@
+{
+    "HTML": ["html5", "html", "xhtml"],
+    "jQuery": ["jquery"],
+    "JavaScript": ["js", "javascript"],
+    "CSS": ["css", "css3"],
+    "AngularJS": ["angular", "angularjs"],
+    "SASS": ["sass"],
+    "TripleLBI": ["triplelbi"],
+    "WordPress":["wordpress"],
+    "UX": ["ux", "usability"],
+    "Firefox": ["firefox5","firefox","ff"],
+    "Internet Explorer":["ie","ie6","ie7","ie8","ie9"],
+    "PHP":["php","php5","php6"],
+    "Google Translate":["googletranslate"],
+    "Google Buzz":["googlebuzz"],
+    "Google Maps":["googlemaps"],
+    "Google Apps":["googleapps"],
+    "YouTube":["youtube"],
+    "MySQL":["mysql"]
+}
