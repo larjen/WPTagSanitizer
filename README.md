@@ -4,12 +4,12 @@ A WordPress plugin that sanitizes tags in posts.
 
 If you add the following tags to your posts they will be transformed like this:
 
-```
-"joe" -> "Joe" (capitalized first letter)
-"iMac" -> "iMac" (no change)
-"googletranslate" -> "Google Translate" (Transformed tag)
-"Wordpress" -> "WordPress" (small p changed to capital P)
-```
+    "joe" -> "Joe" (capitalized first letter)
+    "iMac" -> "iMac" (no change)
+    "googletranslate" -> "Google Translate" (Transformed tag)
+    "Wordpress" -> "WordPress" (small p changed to capital P)
+
+It is also possible to alter the tag mappings from within the plugin controlpanel.
 
 ## Installation
 

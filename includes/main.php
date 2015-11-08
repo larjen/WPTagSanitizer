@@ -7,25 +7,27 @@ class WPTagSanitizer {
 
     static function activation() {
 
-        update_option(self::$plugin_name."_MESSAGES", []);
+        update_option(self::$plugin_name . "_MESSAGES", []);
 
         $jsonTable = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "tagDictionary.json");
 
-        update_option(self::$plugin_name."_JSONTABLE", $jsonTable);
+        update_option(self::$plugin_name . "_JSONTABLE", $jsonTable);
 
         $transformTable = self::getTransformTable($jsonTable);
 
         if ($transformTable != false) {
-            update_option(self::$plugin_name."TRANSFORMTABLE", $transformTable);
+            update_option(self::$plugin_name . "_TRANSFORMTABLE", $transformTable);
         } else {
-            update_option(self::$plugin_name."TRANSFORMTABLE", array());
+            update_option(self::$plugin_name . "_TRANSFORMTABLE", array());
         }
 
         self::add_message("Activated the plugin.");
     }
 
     static function deactivation() {
-        
+        delete_option(self::$plugin_name . "_MESSAGES");
+        delete_option(self::$plugin_name . "_JSONTABLE");
+        delete_option(self::$plugin_name . "_TRANSFORMTABLE");
     }
 
     static function add_message($message) {
@@ -43,6 +45,7 @@ class WPTagSanitizer {
     /*
      * Transforms a jsonObject into a map of tags that can change
      */
+
     static function getTransformTable($jsonObject) {
 
         if (empty($jsonObject)) {
@@ -66,17 +69,18 @@ class WPTagSanitizer {
                 $transformTable[strtoupper($tag)] = $key;
             }
         }
-        
+
 
         self::add_message("Tag mapping has been imported, and definitions will now be applied to future tags.");
-        
+
         return $transformTable;
     }
-    
+
     /*
      * Takes a string validates it against the tag cache, and returns either a
      * new string with the tag name or if not found the original string
      */
+
     public static function sanitizeTags($term) {
 
         $term = trim($term);
@@ -87,7 +91,7 @@ class WPTagSanitizer {
         //if (self::$debug) {error_log('# sanitizeTags $term = ' . ($term));}
         //if (self::$debug) {error_log('# sanitizeTags $taxonomy = ' . ($taxonomy));}
 
-        $transformTable = get_option("WPTagSanitizer_TRANSFORMTABLE");
+        $transformTable = get_option(self::$plugin_name . "_TRANSFORMTABLE");
         $checkTerm = strtoupper($term);
 
         //if (self::$debug) {error_log('# sanitizeTags $transformTable = ');}
@@ -100,14 +104,14 @@ class WPTagSanitizer {
             //if (self::$debug) {error_log('# sanitizeTags ' . $term . ' -> ' . ($returnTerm));}
             return $returnTerm;
         } else {
-            
+
             // if the tag already contains an uppercase character do nothing
-            if(preg_match('/[A-Z]/', $term)){
+            if (preg_match('/[A-Z]/', $term)) {
                 return $term;
             } else {
                 // uppercase first letter and return the tag
                 $term = ucwords($term);
-            
+
                 //if (self::$debug) {error_log('# sanitizeTags ' . $term . ' ');}
                 return $term;
             }
@@ -123,8 +127,9 @@ class WPTagSanitizer {
     /*
      * Scans a string for hastags and returns an array of normalized tags.
      */
-    static function getTagsFromString($string){
-        
+
+    static function getTagsFromString($string) {
+
         $stringArray = explode(" ", $string);
         $returnArray = array();
 
@@ -152,6 +157,7 @@ class WPTagSanitizer {
      * Whenever a post is saved, the tags from the post is sanitized in this
      * function.
      */
+
     static function sanitizePost($post_id) {
 
         //if (self::$debug) {error_log('$post_id =' . $post_id);}
@@ -192,11 +198,11 @@ class WPTagSanitizer {
             // update the post, which calls save_post again
             wp_update_post($post);
 
-
             // re-hook this function
             add_action('save_post', 'WPTagSanitizer::sanitizePost');
         }
     }
+
 }
 
 // register wp hooks

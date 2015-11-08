@@ -10,6 +10,7 @@ class WPTagSanitizerUninstall extends WPTagSanitizer {
     static function uninstall() {
         delete_option(self::$plugin_name . "_MESSAGES");
         delete_option(self::$plugin_name . "_JSONTABLE");
+        delete_option(self::$plugin_name . "_TRANSFORMTABLE");
     }
 }
 
