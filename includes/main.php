@@ -5,6 +5,10 @@ class WPTagSanitizer {
     static $debug = false;
     static $plugin_name = "WPTagSanitizer";
 
+    /*
+     * Activate plugin
+     */
+    
     static function activation() {
 
         update_option(self::$plugin_name . "_MESSAGES", []);
@@ -24,12 +28,20 @@ class WPTagSanitizer {
         self::add_message("Activated the plugin.");
     }
 
+    /*
+     * Deactivate plugin
+     */
+    
     static function deactivation() {
         delete_option(self::$plugin_name . "_MESSAGES");
         delete_option(self::$plugin_name . "_JSONTABLE");
         delete_option(self::$plugin_name . "_TRANSFORMTABLE");
     }
 
+    /*
+     * Helper function to write to log
+     */
+    
     static function add_message($message) {
         $messages = get_option(self::$plugin_name . "_MESSAGES");
         array_push($messages, date("Y-m-d H:i:s") . " - " . $message);
@@ -118,6 +130,10 @@ class WPTagSanitizer {
         }
     }
 
+    /*
+     * Deletes a tag from WordPress 
+     */
+    
     static function removeTags($tags) {
         foreach ($tags as $tag_id) {
             wp_delete_term($tag_id, 'post_tag');
