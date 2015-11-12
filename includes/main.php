@@ -81,27 +81,27 @@ class WPTagSanitizer {
      * new string with the tag name or if not found the original string
      */
 
-    public static function sanitizeTags($term) {
+    public static function sanitizeTag($term) {
 
         $term = trim($term);
         $term = trim($term, ",");
         $term = trim($term, ".");
         $term = trim($term, ":");
 
-        //if (self::$debug) {error_log('# sanitizeTags $term = ' . ($term));}
-        //if (self::$debug) {error_log('# sanitizeTags $taxonomy = ' . ($taxonomy));}
+        //if (self::$debug) {error_log('# sanitizeTag $term = ' . ($term));}
+        //if (self::$debug) {error_log('# sanitizeTag $taxonomy = ' . ($taxonomy));}
 
         $transformTable = get_option(self::$plugin_name . "_TRANSFORMTABLE");
         $checkTerm = strtoupper($term);
 
-        //if (self::$debug) {error_log('# sanitizeTags $transformTable = ');}
+        //if (self::$debug) {error_log('# sanitizeTag $transformTable = ');}
         //if (self::$debug) {error_log(print_r($transformTable));}
-        //if (self::$debug) {error_log('# sanitizeTags $checkTerm = ' . ($checkTerm));}
-        //if (self::$debug) {error_log('# sanitizeTags array_key_exists($checkTerm, $transformTable) = ' . (array_key_exists($checkTerm, $transformTable)));}
+        //if (self::$debug) {error_log('# sanitizeTag $checkTerm = ' . ($checkTerm));}
+        //if (self::$debug) {error_log('# sanitizeTag array_key_exists($checkTerm, $transformTable) = ' . (array_key_exists($checkTerm, $transformTable)));}
 
         if (array_key_exists($checkTerm, $transformTable)) {
             $returnTerm = $transformTable[$checkTerm];
-            //if (self::$debug) {error_log('# sanitizeTags ' . $term . ' -> ' . ($returnTerm));}
+            //if (self::$debug) {error_log('# sanitizeTag ' . $term . ' -> ' . ($returnTerm));}
             return $returnTerm;
         } else {
 
@@ -112,7 +112,7 @@ class WPTagSanitizer {
                 // uppercase first letter and return the tag
                 $term = ucwords($term);
 
-                //if (self::$debug) {error_log('# sanitizeTags ' . $term . ' ');}
+                //if (self::$debug) {error_log('# sanitizeTag ' . $term . ' ');}
                 return $term;
             }
         }
@@ -146,7 +146,7 @@ class WPTagSanitizer {
                 $tag = trim($tag, ":");
 
                 // Normalize the tag
-                $tag = self::sanitizeTags($tag);
+                $tag = self::sanitizeTag($tag);
                 array_push($returnArray, $tag);
             }
         }
@@ -170,7 +170,7 @@ class WPTagSanitizer {
 
         foreach ($tags as $value) {
             $tag = $value->name;
-            $sanitizedTag = self::sanitizeTags($tag);
+            $sanitizedTag = self::sanitizeTag($tag);
             if ($sanitizedTag != $tag) {
                 //if (self::$debug) {error_log('tag that needs to change detected from ' . $tag . ' to ' . $sanitizedTag);}
                 array_push($removeTagList, $value->term_id);
