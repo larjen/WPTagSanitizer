@@ -33,6 +33,7 @@ It is also possible to alter the tag mappings from within the plugin controlpane
 [//]: tag (GitHub)
 [//]: tag (WordPress)
 [//]: tag (PHP)
+[//]: tag (Work)
 [//]: url_github (https://github.com/larjen/WPTagSanitizer)
 [//]: url_demo (#) 
 [//]: url_wordpress (https://wordpress.org/plugins/wptagsanitizer/)
