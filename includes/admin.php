@@ -47,7 +47,7 @@ class WPTagSanitizerAdmin extends WPTagSanitizer {
         echo '<h2>'.self::$plugin_name.'</h2>';
         echo '<p>New tags will be normalized according to these rules. Normalization is case insensitive, however the resulting tag is not.';
         echo '<form method="post" action="">';
-        echo '<textarea name="'.self::$plugin_name.'_JSONTABLE" style="width: 50%;height: 400px;">' . $textAreaValue . '</textarea>';
+        echo '<textarea name="'.self::$plugin_name.'_JSONTABLE" style="width: 50%;height: 400px;white-space: nowrap; overflow: auto;.">' . $textAreaValue . '</textarea>';
         echo '<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"></p>';
         echo '</form></div>';
     }
